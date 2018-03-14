@@ -2,6 +2,7 @@ package org.bysj.pleural.service;
 
 import org.bysj.pleural.bean.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -16,43 +17,33 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * @Description: 用户注册
-     * @date   2018/3/13 13:38
-     * @param    user
-     * @return  user
-     * @author ljianf
-     */
-    public User regsiterUser(User user) throws UnsupportedEncodingException;
-
-
-    /**
-     * @Description: 用户登录
-     * @date   2018/3/13 13:38
-     * @param    User
-     * @return  user
-     * @author ljianf
-     */
-    public User login(User user);
-
-
-    /**
-     * @Description: 用户登出
-     * @date   2018/3/13 13:50
-     * @param    user
+     * @Description: 保存用户信息
+     * @date   2018/3/14 10:26
+     * @param
      * @return
      * @author ljianf
      */
-    public void logout(User user);
+    @Transactional
+    public User saveUserInfo(User user);
+
 
     /**
-     * @Description: 修改密码
-     * @date   2018/3/13 13:51
-     * @param user
-     * @return user
+     * @Description: 通过用户名查询用户
+     * @date   2018/3/14 9:42
+     * @param
+     * @return
      * @author ljianf
      */
-    public User changePassword(User user);
+    public User findUserByUsername(String username);
 
+    /**
+     * @Description: 修改用户信息
+     * @date   2018/3/14 17:11
+     * @param
+     * @return
+     * @author ljianf
+     */
+    public int updateUserInfo(User user);
 
     public List<User> listUserPage();
 }

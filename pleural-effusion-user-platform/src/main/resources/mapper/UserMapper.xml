@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bysj.pleural.mapper.UserMapper">
+    <sql id="Base_Column_List">id,username,password,telphone,age,salt,role_id,locked,create_time,update_time</sql>
+
     <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" parameterType="org.bysj.pleural.bean.User">
-        insert into sys_user(username,password,telphone,salt,role_id)
-        values(#{username},#{password},#{telphone},#{salt},#{roleId})
+        INSERT INTO sys_user(username,password,telphone,salt,role_id)
+        VALUES (#{username},#{password},#{telphone},#{salt},#{roleId})
     </insert>
+
+
+    <select id="findUserByUsername" resultType="org.bysj.pleural.bean.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_user t WHERE t.username=#{username}
+    </select>
+
+
+    <update id="updateUser" parameterType="org.bysj.pleural.bean.User">
+        UPDATE sys_user SET username=#{username},password=#{password}
+    </update>
 </mapper>

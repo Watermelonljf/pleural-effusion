@@ -29,15 +29,7 @@ public class UserSerivceImplTest {
     @Transactional
     @Rollback(true) //完成后事务回滚
     public void regsiterUser() throws Exception {
-        for(int i=13;i<15;i++) {
-            User user = new User();
-            user.setUsername("watermelon"+i);
-            user.setPassword("ljf645712");
-            user.setTelphone("15858540012");
-            user.setRoleId(1);
-            userService.regsiterUser(user);
-            System.out.println(user.getId());
-        }
+
 
     }
 

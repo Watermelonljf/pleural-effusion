@@ -1,5 +1,6 @@
 package org.bysj.pleural.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.mapper.UserMapper;
@@ -22,37 +23,30 @@ import java.util.UUID;
  * <pre>作者: ljianf</pre>
  */
 @Service
+@Slf4j
 public class UserSerivceImpl implements UserService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserSerivceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
 
 
-    public User regsiterUser(User user) throws UnsupportedEncodingException {
-        //个人随机盐值
-        String salt = UUID.randomUUID().toString();
-        //设置加密后的密码
-        user.setPassword(DigestUtils.md5Hex(user.getPassword()+salt));
-        user.setSalt(salt);
-        userMapper.insert(user);
+    @Override
+    public User saveUserInfo(User user) {
+        userMapper.saveUser(user);
         return user;
     }
 
-    public User login(User user) {
-        return null;
+    public User findUserByUsername(String username) {
+        return userMapper.findUserByUsername(username);
     }
 
-    public void logout(User user) {
-
-    }
-
-    public User changePassword(User user) {
-        return null;
+    @Override
+    public int updateUserInfo(User user) {
+        return 0;
     }
 
 
+    @Override
     public List<User> listUserPage(){
         return null;
     }

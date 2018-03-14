@@ -1,5 +1,6 @@
 package org.bysj.pleural.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.bysj.pleural.bean.User;
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +12,12 @@ import org.springframework.stereotype.Repository;
  * <pre>作者: ljianf</pre>
  */
 @Repository
-public interface UserMapper extends MyBaseMapper<User>{
+public interface UserMapper{
 
-    //public void saveUser(User user);
+    public void saveUser(User user);
+
+    public User findUserByUsername(@Param("username") String username);
+
+    public int updateUser(User user);
 
 }
