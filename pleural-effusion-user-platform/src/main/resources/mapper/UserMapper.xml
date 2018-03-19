@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bysj.pleural.mapper.UserMapper">
     <sql id="Base_Column_List">id,username,password,telphone,age,salt,role_id,locked,create_time,update_time</sql>
+    <resultMap id="BaseResultMap" type="org.bysj.pleural.bean.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="age" property="age"/>
+        <result column="telphone" property="telphone"/>
+        <result column="salt" property="salt"/>
+        <result column="role_id" property="roleId"/>
+        <result column="locked" property="locked"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
 
     <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" parameterType="org.bysj.pleural.bean.User">
         INSERT INTO sys_user(username,password,telphone,salt,role_id)
@@ -15,8 +27,12 @@
         FROM sys_user t WHERE t.username=#{username}
     </select>
 
+    <select id="listUsers" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_user
+    </select>
 
-    <update id="updateUser" parameterType="org.bysj.pleural.bean.User">
-        UPDATE sys_user SET username=#{username},password=#{password}
+
+    <update id="changePasswordByUsername" parameterType="org.bysj.pleural.bean.User">
+        UPDATE sys_user t SET t.password=#{password} WHERE t.username=#{username}
     </update>
 </mapper>

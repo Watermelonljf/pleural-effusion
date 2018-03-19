@@ -1,7 +1,7 @@
 package org.bysj.pleural.algorithm;
 
-import org.bysj.pleural.dto.BestSvmParamsDTO;
-import org.bysj.pleural.dto.FoaParamsDTO;
+import org.bysj.pleural.dto.model.BestSvmParamsDTO;
+import org.bysj.pleural.dto.model.FoaParamsDTO;
 import org.bysj.pleural.svm.Svm;
 import org.bysj.pleural.svm.SvmParameter;
 import org.bysj.pleural.svm.SvmProblem;

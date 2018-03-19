@@ -3,6 +3,8 @@ package org.bysj.pleural.facade;
 import lombok.extern.slf4j.Slf4j;
 import org.bysj.pleural.UserPlatformApplication;
 import org.bysj.pleural.bean.User;
+import org.bysj.pleural.dto.common.Response;
+import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * <pre>类名: UserFacadeTest</pre>
  * <pre>描述: </pre>
- * <pre>版权: 税友软件集团股份有限公司</pre>
  * <pre>日期: 2018/3/14  15:15</pre>
  * <pre>作者: ljianf</pre>
  */
@@ -44,9 +45,19 @@ public class UserFacadeTest {
     @Test
     public void login() throws Exception {
         User user = new User();
-        user.setUsername("watermelon1");
-        user.setPassword("ljf645712");
+        user.setUsername("watermelon2");
+        user.setPassword("ljf645713");
         String token = userFacade.login(user);
         log.info(token);
+    }
+
+    @Test
+    public void changePassword(){
+        ChangePasswordRequestDTO requestDTO = new ChangePasswordRequestDTO();
+        requestDTO.setUsername("watermelon2");
+        requestDTO.setOldPassword("ljf645713");
+        requestDTO.setNewPassword("ljf645712");
+        Response<?> response = userFacade.changePassword(requestDTO);
+        log.info(response.getType().getText());
     }
 }

@@ -5,9 +5,10 @@ import org.bysj.pleural.algorithm.FoaSvm;
 import org.bysj.pleural.bean.Xqjy;
 import org.bysj.pleural.builder.SVMParamsBuilder;
 import org.bysj.pleural.converter.XqjyDTOConverter;
-import org.bysj.pleural.dto.BestSvmParamsDTO;
-import org.bysj.pleural.dto.FoaParamsDTO;
-import org.bysj.pleural.dto.XqjyDTO;
+
+import org.bysj.pleural.dto.model.BestSvmParamsDTO;
+import org.bysj.pleural.dto.model.FoaParamsDTO;
+import org.bysj.pleural.dto.model.XqjyDTO;
 import org.bysj.pleural.exception.BusinessException;
 import org.bysj.pleural.mapper.TrainMapper;
 import org.bysj.pleural.service.ModelTrainService;

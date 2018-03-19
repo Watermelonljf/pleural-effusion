@@ -1,6 +1,7 @@
 package org.bysj.pleural.service;
 
 import org.bysj.pleural.bean.User;
+import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +18,14 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * @Description: 保存用户信息
+     * @Description: 注册用户
      * @date   2018/3/14 10:26
      * @param
      * @return
      * @author ljianf
      */
     @Transactional
-    public User saveUserInfo(User user);
+    public User registeUser(User user);
 
 
     /**
@@ -37,13 +38,18 @@ public interface UserService {
     public User findUserByUsername(String username);
 
     /**
-     * @Description: 修改用户信息
+     * @Description: 修改密码
      * @date   2018/3/14 17:11
-     * @param
-     * @return
+     * @param request
+     * @return int
      * @author ljianf
      */
-    public int updateUserInfo(User user);
+    @Transactional
+    public Integer updatePassword(ChangePasswordRequestDTO request);
+
 
     public List<User> listUserPage();
+
+    public String login(User user);
 }
+

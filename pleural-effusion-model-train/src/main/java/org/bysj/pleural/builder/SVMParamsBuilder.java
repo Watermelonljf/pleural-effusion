@@ -2,7 +2,8 @@ package org.bysj.pleural.builder;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.bysj.pleural.bean.Xqjy;
-import org.bysj.pleural.dto.XqjyDTO;
+
+import org.bysj.pleural.dto.model.XqjyDTO;
 import org.bysj.pleural.svm.SvmNode;
 import org.bysj.pleural.svm.SvmParameter;
 import org.bysj.pleural.svm.SvmProblem;

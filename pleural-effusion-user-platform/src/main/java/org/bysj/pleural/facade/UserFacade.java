@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.constant.user.UserMessageConstant;
+import org.bysj.pleural.dto.common.Response;
+import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
 import org.bysj.pleural.enumeration.user.LockedStateEnum;
 import org.bysj.pleural.exception.BusinessException;
 import org.bysj.pleural.helper.JwtHelper;
@@ -47,12 +49,7 @@ public class UserFacade {
      * @author ljianf
      */
     public User regsiterUser(User user) {
-        String salt = UUID.randomUUID().toString();
-        //设置加密后的密码
-        user.setPassword(DigestUtils.md5Hex(user.getPassword() + salt));
-        user.setSalt(salt);
-        userSerivce.saveUserInfo(user);
-        return user;
+        return userSerivce.registeUser(user);
     }
 
 
@@ -64,27 +61,7 @@ public class UserFacade {
      * @author ljianf
      */
     public String login(User user) {
-        User loginUser = userSerivce.findUserByUsername(user.getUsername());
-        //用户不存在
-        if (Objects.isNull(loginUser)) {
-            throw new BusinessException(UserMessageConstant.USER_NOT_EXIST_INFO);
-        }
-        //首先判断用户是否是锁定用户
-        if (LockedStateEnum.USER_LOCKED.getCode() == loginUser.getLocked()) {
-            throw new BusinessException(UserMessageConstant.USER_LOCKED_INFO);
-        }
-        //用户名或密码错误
-        if (!DigestUtils.md5Hex(user.getPassword() + loginUser.getSalt()).equals(loginUser.getPassword())) {
-            throw new BusinessException(UserMessageConstant.USER_PASSWORD_OR_USERNAME_ERROR_INFO);
-        }
-        //登录成功,签发token
-        String token = jwtHelper.createAuthenticationToken(user);
-
-        //操作redis
-        redisHelp.cacheValue(USER_REDIS_PREFIX+loginUser.getId()+":"+loginUser.getUsername(),user,EXPIRATIONTIME);
-
-        return token;
-
+        return userSerivce.login(user);
     }
 
 
@@ -109,9 +86,12 @@ public class UserFacade {
      * @date 2018/3/13 13:51
      * @author ljianf
      */
-    public User changePassword(User user) {
-
-        return null;
+    public Response<?> changePassword(ChangePasswordRequestDTO request) {
+        Integer isChanged = userSerivce.updatePassword(request);
+        if(isChanged==1L){
+            return Response.success();
+        }
+        return Response.error();
     }
 
 }

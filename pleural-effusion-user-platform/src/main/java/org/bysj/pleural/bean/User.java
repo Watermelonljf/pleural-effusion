@@ -16,27 +16,38 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @ToString
+
 public class User implements Serializable {
 
     private static final long serialVersionUID = 6660357355644810510L;
 
+
     private Integer id;
+
 
     private String username;  //用户名
 
+
     private String password;  //密码
+
 
     private Integer age;
 
+
     private String telphone; //联系电话
+
 
     private String salt;     //加密盐值
 
+
     private Integer roleId;  //角色Id
+
 
     private Integer locked;   //是否锁定
 
+
     private Date createTime;
+
 
     private Date updateTime;
 

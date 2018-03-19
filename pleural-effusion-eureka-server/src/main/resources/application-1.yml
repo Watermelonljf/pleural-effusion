@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: pleural-eureka-server
+#security:
+#  basic:
+#   enabled: true          #开启http basic验证
+#  user:
+#    name: ljf
+#    password: ljf12456
+---
+spring:
+  profiles: peer1
+server:
+  port: 9092
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://localhost:9093/eureka/
+---
+spring:
+  profiles: peer2
+server:
+  port: 9093
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://localhost:9092/eureka/

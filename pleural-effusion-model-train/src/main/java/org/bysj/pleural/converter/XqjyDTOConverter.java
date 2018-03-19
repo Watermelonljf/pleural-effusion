@@ -2,7 +2,7 @@ package org.bysj.pleural.converter;
 
 import com.google.common.base.Converter;
 import org.bysj.pleural.bean.Xqjy;
-import org.bysj.pleural.dto.XqjyDTO;
+import org.bysj.pleural.dto.model.XqjyDTO;
 import org.bysj.pleural.utils.CollectionsUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
