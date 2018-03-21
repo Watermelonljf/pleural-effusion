@@ -48,7 +48,7 @@ public class FOATrainServiceImpl implements ModelTrainService {
     private static final Logger LOGGER = LoggerFactory.getLogger(FOATrainServiceImpl.class);
 
 
-    public SvmModel getModle() {
+    public SvmModel getModle(FoaParamsDTO foaParamsDTO) {
         List<Xqjy> xqjys = trainMapper.getAllTrainData();
         List<XqjyDTO> xqjyDTOS = xqjyDTOConverter.convertFor(xqjys);
         try {
@@ -56,7 +56,7 @@ public class FOATrainServiceImpl implements ModelTrainService {
             SvmProblem svmParams = svmParamsBuilder.getSvmParams(xqjyDTOS);
             LOGGER.info("转换参数结束，成功");
             //利用FOA获取最佳参数对
-            BestSvmParamsDTO svmParasByFOA = foaSvm.getSVMParasByFOA(new FoaParamsDTO(10, 10), svmParams, xqjys.size());
+            BestSvmParamsDTO svmParasByFOA = foaSvm.getSVMParasByFOA(foaParamsDTO, svmParams, xqjys.size());
             LOGGER.info("最佳参数对信息：【C:{},gamma:{}】",svmParasByFOA.getC(),svmParasByFOA.getG());
         } catch (Exception e) {
             LOGGER.error("参数转换异常,原因：{}",e);
@@ -65,8 +65,8 @@ public class FOATrainServiceImpl implements ModelTrainService {
         return null;
     }
 
-    public List<Xqjy> getAllXqjy() {
+    public List<Xqjy> getTrainData() {
         List<Xqjy> xqjys = trainMapper.getAllTrainData();
-        return null;
+        return xqjys;
     }
 }

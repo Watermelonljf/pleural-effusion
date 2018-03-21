@@ -2,6 +2,7 @@ package org.bysj.pleural.dto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -12,6 +13,7 @@ import lombok.ToString;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class FoaParamsDTO {
     private int maxgen;   // 最大迭代次数

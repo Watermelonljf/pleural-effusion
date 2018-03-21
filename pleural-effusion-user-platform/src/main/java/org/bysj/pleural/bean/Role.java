@@ -1,5 +1,6 @@
 package org.bysj.pleural.bean;
 
+import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -27,7 +28,7 @@ public class Role implements Serializable {
 
     private String description;
 
-    private Short available;
+    private Integer available;
 
     private Date createTime;
 

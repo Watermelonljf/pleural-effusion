@@ -2,6 +2,7 @@ package org.bysj.pleural.service.impl;
 
 import org.bysj.pleural.DiagnoseApplication;
 import org.bysj.pleural.bean.Xqjy;
+import org.bysj.pleural.dto.model.FoaParamsDTO;
 import org.bysj.pleural.service.ModelTrainService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,13 +32,13 @@ public class FOATrainServiceImplTest {
 
     @Test
     public void getAllXqjy() throws Exception {
-        List<Xqjy> allXqjy = modleTrainService.getAllXqjy();
+        List<Xqjy> allXqjy = modleTrainService.getTrainData();
         Arrays.asList(allXqjy).toString();
     }
 
     @Test
     public void testSvmParams(){
-        modleTrainService.getModle();
+        modleTrainService.getModle(new FoaParamsDTO());
     }
 
 }

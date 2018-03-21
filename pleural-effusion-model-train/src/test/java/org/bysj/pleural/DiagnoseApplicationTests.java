@@ -25,7 +25,7 @@ public class DiagnoseApplicationTests {
 
 	@Test
 	public void testGetAllXqjy(){
-		List<Xqjy> allXqjy = modleTrainService.getAllXqjy();
+		List<Xqjy> allXqjy = modleTrainService.getTrainData();
 		Arrays.asList(allXqjy).toString();
 	}
 
