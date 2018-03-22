@@ -7,4 +7,6 @@ package org.bysj.pleural.dto.user;
  * <pre>作者: ljianf</pre>
  */
 public class RoleDTO {
+
+
 }

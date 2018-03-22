@@ -103,6 +103,10 @@ public class Response<T> {
         return new Response(ResponseTypeEnum.SUCCESS,"","","");
     }
 
+    public static <T> Response<T> success(T data){
+        return new Response(ResponseTypeEnum.SUCCESS,"","",data);
+    }
+
     public static <T> Response<T> success(String message,T data){
         return new Response(ResponseTypeEnum.SUCCESS,null,message,data);
     }

@@ -37,5 +37,4 @@ public class RoleMapperTest {
         Integer count = roleMapper.saveRole(role);
         log.info(count+"");
     }
-
 }
