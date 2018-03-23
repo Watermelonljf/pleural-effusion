@@ -99,15 +99,14 @@ public class FoaSvm {
         Y_axis[1] = Y[index][1];
 
 
-
-
+        //TODO: 干扰机制引入
         for(int gen = 0; gen < maxgen; gen++){
             //寻优开始
             for(int i=0;i<sizepop;i++){
                 //初始化果蝇飞行距离
                 for(int j=0;j<2;j++){
-                    X[i][j] = X_axis[j]+20*Math.random()-10;
-                    Y[i][j] = Y_axis[j]+20*Math.random()-10;
+                    X[i][j] = X_axis[j]+30*Math.random()-10;
+                    Y[i][j] = Y_axis[j]+30*Math.random()-10;
                 }
 
                 //求出与原点的距离
@@ -125,7 +124,8 @@ public class FoaSvm {
                 svmParameter.C = c;
                 svmParameter.gamma = g;
                 double [] result = new double[dataSetLength];
-                LOGGER.info("参数检查结果:{}",Svm.svm_check_parameter(sp, svmParameter)==null?true:false); //如果参数没有问题，则svm.svm_check_parameter()函数返回null,否则返回error描述。
+                //如果参数没有问题，则svm.svm_check_parameter()函数返回null,否则返回error描述。
+                LOGGER.info("参数检查结果:{}",Svm.svm_check_parameter(sp, svmParameter)==null?true:false);
                 Svm.svm_cross_validation(sp, svmParameter, 5, result);
                 BigDecimal acc = SvmResultAnalyseUtil.resultAnalyse(result, sp.y);
                 LOGGER.info("第{}代的第{}次寻优",gen,i);
@@ -139,6 +139,7 @@ public class FoaSvm {
                 bestSvmParamsDTO.setAcc(tempBest.getAcc());
                 bestSvmParamsDTO.setC(S[index2][0]);
                 bestSvmParamsDTO.setG(S[index2][1]);
+                LOGGER.info("当前最好精确度：{}",tempBest.getAcc());
                 System.out.println("----------->"+S[index2][0]+"     "+S[index2][1]);
                 bestCVaccuarcy = tempBest.getAcc();
                 //保存当前最优的果蝇

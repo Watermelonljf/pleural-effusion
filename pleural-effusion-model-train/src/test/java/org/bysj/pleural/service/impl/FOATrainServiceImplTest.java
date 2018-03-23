@@ -38,7 +38,7 @@ public class FOATrainServiceImplTest {
 
     @Test
     public void testSvmParams(){
-        modleTrainService.getModle(new FoaParamsDTO());
+        modleTrainService.getModle(new FoaParamsDTO(10,10));
     }
 
 }
