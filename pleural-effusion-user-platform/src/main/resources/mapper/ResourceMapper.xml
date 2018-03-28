@@ -11,7 +11,7 @@
 
     <select id="listUserResource" resultMap="BaseResultMap">
           SELECT
-            r.role,res.name,res.parent_id,res.order,res.icon,res.id resource_id
+            r.role,res.name,res.url url,res.parent_id,res.order,res.icon,res.id resource_id
           FROM
             sys_user u,
             sys_role r,
