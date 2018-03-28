@@ -5,6 +5,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.constant.user.UserMessageConstant;
 import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
+import org.bysj.pleural.dto.user.ClientUserInfoDTO;
 import org.bysj.pleural.enumeration.user.LockedStateEnum;
 import org.bysj.pleural.exception.BusinessException;
 import org.bysj.pleural.helper.JwtHelper;
@@ -90,14 +91,21 @@ public class UserSerivceImpl implements UserService {
     }
 
     @Override
-    public String login(User user) {
+    public ClientUserInfoDTO login(User user) {
         User loginUser = userMapper.findUserByUsername(user.getUsername());
+        log.info("检查登录信息开始");
         judgeUserInfo(loginUser,user);
+        log.info("检查登录信息结束");
         //登录成功,签发token
+        log.info("开始签发Token");
         String token = jwtHelper.createAuthenticationToken(user);
         //操作redis
-        redisHelp.cacheValue(USER_REDIS_PREFIX+loginUser.getId()+":"+loginUser.getUsername(),user,Long.parseLong(EXPIRATIONTIME));
-        return token;
+        redisHelp.cacheValue(USER_REDIS_PREFIX+user.getId()+":"+user.getUsername(),user,Long.parseLong(EXPIRATIONTIME));
+        ClientUserInfoDTO userInfo = new ClientUserInfoDTO();
+        userInfo.setUsername(user.getUsername());
+        userInfo.setUserId(loginUser.getId());
+        userInfo.setToken(token);
+        return userInfo;
     }
 
     private Boolean judgeUserInfo(User loginUser,User user){

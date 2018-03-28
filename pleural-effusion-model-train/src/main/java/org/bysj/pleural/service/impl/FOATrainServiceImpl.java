@@ -56,6 +56,7 @@ public class FOATrainServiceImpl implements ModelTrainService {
             SvmProblem svmParams = svmParamsBuilder.getSvmParams(xqjyDTOS);
             LOGGER.info("转换参数结束，成功");
             //利用FOA获取最佳参数对
+            //TODO:多做几折
             BestSvmParamsDTO svmParasByFOA = foaSvm.getSVMParasByFOA(foaParamsDTO, svmParams, xqjys.size());
             LOGGER.info("最佳参数对信息：【C:{},gamma:{}】",svmParasByFOA.getC(),svmParasByFOA.getG());
         } catch (Exception e) {

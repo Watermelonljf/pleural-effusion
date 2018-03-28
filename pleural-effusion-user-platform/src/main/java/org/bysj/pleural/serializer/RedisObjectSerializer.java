@@ -1,4 +1,4 @@
-package org.bysj.pleural.Serializer;
+package org.bysj.pleural.serializer;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.serializer.support.DeserializingConverter;

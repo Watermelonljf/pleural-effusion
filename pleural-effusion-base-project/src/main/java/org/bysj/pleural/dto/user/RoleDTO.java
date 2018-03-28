@@ -8,5 +8,4 @@ package org.bysj.pleural.dto.user;
  */
 public class RoleDTO {
 
-
 }

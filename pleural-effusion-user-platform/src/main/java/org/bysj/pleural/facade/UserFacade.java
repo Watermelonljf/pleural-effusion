@@ -13,6 +13,7 @@ import org.bysj.pleural.helper.RedisHelp;
 import org.bysj.pleural.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -48,8 +49,11 @@ public class UserFacade {
      * @date 2018/3/13 13:38
      * @author ljianf
      */
-    public User regsiterUser(User user) {
-        return userSerivce.registeUser(user);
+    public Response<?> regsiterUser(User user) {
+        log.info("开始保存用户信息！");
+        userSerivce.registeUser(user);
+        log.info("调用登录接口注册完成后自动登录");
+        return Response.success(userSerivce.login(user));
     }
 
 
@@ -60,8 +64,8 @@ public class UserFacade {
      * @return
      * @author ljianf
      */
-    public String login(User user) {
-        return userSerivce.login(user);
+    public Response<?> login(User user) {
+        return Response.success(userSerivce.login(user));
     }
 
 
@@ -72,6 +76,7 @@ public class UserFacade {
      * @return
      * @author ljianf
      */
+    @Async
     public void logout(User user) {
         String key = USER_REDIS_PREFIX+user.getId()+":"+user.getUsername();
         if(redisHelp.containsKey(USER_REDIS_PREFIX+user.getId()+":"+user.getUsername())){

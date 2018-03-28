@@ -47,8 +47,7 @@ public class UserFacadeTest {
         User user = new User();
         user.setUsername("watermelon2");
         user.setPassword("ljf645713");
-        String token = userFacade.login(user);
-        log.info(token);
+        Response<?> token = userFacade.login(user);
     }
 
     @Test

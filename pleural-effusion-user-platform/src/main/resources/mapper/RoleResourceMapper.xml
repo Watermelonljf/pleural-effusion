@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bysj.pleural.mapper.RoleResourceMapper">
+
+    <insert id="saveRoleResource" parameterType="java.util.List">
+        insert into sys_role_resource(role_id,resource_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+              #{item.roleId},
+              #{item.resourceId}
+            )
+        </foreach>
+    </insert>
+
+</mapper>
