@@ -11,10 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <pre>类名: UserController</pre>
@@ -31,7 +28,8 @@ public class UserController {
 
 
     @PostMapping(value = "/login")
-    public Response<?> login(@RequestBody  UserDTO user){
+    @ResponseBody
+    public Response<?> login(UserDTO user){
         if(StringUtils.isBlank(user.getUsername())){
             throw new BusinessException(UserMessageConstant.USER_USERNAME_EMPTY);
         }
@@ -44,6 +42,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout")
+    @ResponseBody
     @Async
     public Response<?> logout(UserDTO user){
         final User userCmp = new User();

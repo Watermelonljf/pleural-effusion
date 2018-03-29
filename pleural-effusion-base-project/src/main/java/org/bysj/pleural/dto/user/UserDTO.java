@@ -26,6 +26,9 @@ public class UserDTO {
     private String password;  //密码
 
 
+    private String vercode;
+
+
     private Integer age;
 
 
