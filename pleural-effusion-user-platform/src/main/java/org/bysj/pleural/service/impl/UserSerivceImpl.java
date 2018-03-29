@@ -111,6 +111,7 @@ public class UserSerivceImpl implements UserService {
     private Boolean judgeUserInfo(User loginUser,User user){
         //用户不存在
         if (Objects.isNull(loginUser)) {
+
             throw new BusinessException(UserMessageConstant.USER_NOT_EXIST_INFO);
         }
         //首先判断用户是否是锁定用户
