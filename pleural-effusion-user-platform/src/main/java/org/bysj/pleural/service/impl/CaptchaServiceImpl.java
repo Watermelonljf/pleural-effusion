@@ -44,10 +44,10 @@ public class CaptchaServiceImpl implements CaptchaService{
         if(!redisHelp.containsKey(uuid)){
             throw new BusinessException("验证码过期，请刷新！");
         }
-        String code = redisHelp.getValue(uuid);
-        if(code.equals(text)){
-            return true;
+        String code = (String)redisHelp.getValue(uuid);
+        if(!code.equals(text)) {
+            throw new BusinessException("验证码输入错误！");
         }
-        return false;
+        return true;
     }
 }

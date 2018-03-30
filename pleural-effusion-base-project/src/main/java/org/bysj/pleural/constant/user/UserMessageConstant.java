@@ -14,5 +14,7 @@ public class UserMessageConstant {
     public static final String USER_CHANGE_PASSWORD_OLD_PASSWORD_ERROR_INFO = "您输入的旧密码错误！";
     public static final String USER_USERNAME_EMPTY = "用户名不能为空！";
     public static final String USER_PASSWORD_EMPTY = "密码不能为空！";
+    public static final String USER_REGSITER_EMAIL_SEND_ERROR = "注册邮件发送异常！";
+    public static final String USER_NOT_AVAILABLE = "当前用户未激活！";
     public static final String ROLE_NAME_EMPTY = "角色名不能为空！";
 }

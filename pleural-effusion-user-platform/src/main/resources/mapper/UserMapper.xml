@@ -7,17 +7,20 @@
         <result column="username" property="username"/>
         <result column="password" property="password"/>
         <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="sex" property="sex"/>
         <result column="telphone" property="telphone"/>
         <result column="salt" property="salt"/>
         <result column="role_id" property="roleId"/>
         <result column="locked" property="locked"/>
+        <result column="available" property="available"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" parameterType="org.bysj.pleural.bean.User">
-        INSERT INTO sys_user(username,password,telphone,salt,role_id)
-        VALUES (#{username},#{password},#{telphone},#{salt},#{roleId})
+        INSERT INTO sys_user(username,password,telphone,salt,role_id,age,email,sex)
+        VALUES (#{username},#{password},#{telphone},#{salt},#{roleId},#{age},#{email},#{sex})
     </insert>
 
 

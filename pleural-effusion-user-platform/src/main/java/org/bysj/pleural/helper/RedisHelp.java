@@ -72,9 +72,9 @@ public class RedisHelp {
    * @return
    * @author ljianf
    */
-    public String getValue(String key) {
+    public Object getValue(String key) {
         try {
-             redisTemplate.opsForValue().get(key);
+             return redisTemplate.opsForValue().get(key);
         } catch (Exception t) {
             log.error("获取缓存失败key[" + key + ", error[" + t + "]");
         }

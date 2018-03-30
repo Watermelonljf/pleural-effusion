@@ -3,6 +3,7 @@ package org.bysj.pleural.service;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
 import org.bysj.pleural.dto.user.ClientUserInfoDTO;
+import org.bysj.pleural.dto.user.UserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,6 +52,6 @@ public interface UserService {
 
     public List<User> listUserPage();
 
-    public ClientUserInfoDTO login(User user);
+    public ClientUserInfoDTO login(UserDTO user);
 }
 

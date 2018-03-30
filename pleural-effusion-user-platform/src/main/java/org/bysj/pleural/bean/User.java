@@ -30,21 +30,24 @@ public class User implements Serializable {
 
     private String password;  //密码
 
+    private Integer age;  //年龄
 
-    private Integer age;
+    private Integer sex;
 
+    private String email;
 
     private String telphone; //联系电话
-
 
     private String salt;     //加密盐值
 
 
     private Integer roleId;  //角色Id
 
+    private String code;  //注册激活码
 
     private Integer locked;   //是否锁定
 
+    private Integer available;
 
     private Date createTime;
 

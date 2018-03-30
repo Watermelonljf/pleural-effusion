@@ -5,6 +5,7 @@ import org.bysj.pleural.UserPlatformApplication;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
+import org.bysj.pleural.dto.user.UserDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class UserFacadeTest {
 
     @Test
     public void login() throws Exception {
-        User user = new User();
+        UserDTO user = new UserDTO();
         user.setUsername("watermelon2");
         user.setPassword("ljf645713");
         Response<?> token = userFacade.login(user);

@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,6 +18,7 @@ import java.util.concurrent.Executor;
 @EnableEurekaClient
 @MapperScan("org.bysj.pleural.mapper")
 @EnableAsync
+@EnableCircuitBreaker
 public class UserPlatformApplication {
 
     public static void main(String[] args) {

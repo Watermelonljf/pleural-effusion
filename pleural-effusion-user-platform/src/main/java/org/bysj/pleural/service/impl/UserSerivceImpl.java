@@ -1,12 +1,17 @@
 package org.bysj.pleural.service.impl;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.constant.user.UserMessageConstant;
 import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
 import org.bysj.pleural.dto.user.ClientUserInfoDTO;
+import org.bysj.pleural.dto.user.UserDTO;
+import org.bysj.pleural.enumeration.user.AvailableEnum;
 import org.bysj.pleural.enumeration.user.LockedStateEnum;
+import org.bysj.pleural.enumeration.user.RoleEnum;
 import org.bysj.pleural.exception.BusinessException;
 import org.bysj.pleural.helper.JwtHelper;
 import org.bysj.pleural.helper.RedisHelp;
@@ -57,6 +62,8 @@ public class UserSerivceImpl implements UserService {
         //设置加密后的密码
         user.setPassword(DigestUtils.md5Hex(user.getPassword() + salt));
         user.setSalt(salt);
+        user.setRoleId(RoleEnum.COMMON_USER.getCode());
+        user.setCode(UUID.randomUUID().toString().replace("-",""));
         userMapper.saveUser(user);
         return user;
     }
@@ -91,16 +98,17 @@ public class UserSerivceImpl implements UserService {
     }
 
     @Override
-    public ClientUserInfoDTO login(User user) {
+    public ClientUserInfoDTO login(UserDTO user) {
+
         User loginUser = userMapper.findUserByUsername(user.getUsername());
         log.info("检查登录信息开始");
         judgeUserInfo(loginUser,user);
         log.info("检查登录信息结束");
         //登录成功,签发token
         log.info("开始签发Token");
-        String token = jwtHelper.createAuthenticationToken(user);
+        String token = jwtHelper.createAuthenticationToken(loginUser);
         //操作redis
-        redisHelp.cacheValue(USER_REDIS_PREFIX+user.getId()+":"+user.getUsername(),user,Long.parseLong(EXPIRATIONTIME));
+        redisHelp.cacheValue(USER_REDIS_PREFIX+loginUser.getId()+":"+user.getUsername(),user,Long.parseLong(EXPIRATIONTIME));
         ClientUserInfoDTO userInfo = new ClientUserInfoDTO();
         userInfo.setUsername(user.getUsername());
         userInfo.setUserId(loginUser.getId());
@@ -108,11 +116,15 @@ public class UserSerivceImpl implements UserService {
         return userInfo;
     }
 
-    private Boolean judgeUserInfo(User loginUser,User user){
+    private Boolean judgeUserInfo(User loginUser,UserDTO user){
         //用户不存在
         if (Objects.isNull(loginUser)) {
 
             throw new BusinessException(UserMessageConstant.USER_NOT_EXIST_INFO);
+        }
+        //是否激活
+        if(AvailableEnum.USER_NOT_AVAILABLE.getCode()==loginUser.getAvailable()){
+            throw new BusinessException(UserMessageConstant.USER_NOT_AVAILABLE);
         }
         //首先判断用户是否是锁定用户
         if (LockedStateEnum.USER_LOCKED.getCode() == loginUser.getLocked()) {

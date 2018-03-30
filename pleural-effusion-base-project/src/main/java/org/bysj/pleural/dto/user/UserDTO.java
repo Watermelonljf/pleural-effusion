@@ -19,6 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class UserDTO {
 
+    private Integer userId;
 
     private String username;  //用户名
 
@@ -30,6 +31,8 @@ public class UserDTO {
 
 
     private Integer age;
+
+    private String imgToken;
 
 
     private String telphone; //联系电话

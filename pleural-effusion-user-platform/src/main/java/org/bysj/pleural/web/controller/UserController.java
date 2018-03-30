@@ -5,6 +5,7 @@ import org.bysj.pleural.bean.User;
 import org.bysj.pleural.constant.user.UserMessageConstant;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.dto.user.UserDTO;
+import org.bysj.pleural.enumeration.common.ResponseTypeEnum;
 import org.bysj.pleural.exception.BusinessException;
 import org.bysj.pleural.facade.UserFacade;
 import org.springframework.beans.BeanUtils;
@@ -28,7 +29,6 @@ public class UserController {
 
 
     @PostMapping(value = "/login")
-    @ResponseBody
     public Response<?> login(UserDTO user){
         if(StringUtils.isBlank(user.getUsername())){
             throw new BusinessException(UserMessageConstant.USER_USERNAME_EMPTY);
@@ -36,18 +36,19 @@ public class UserController {
         if(StringUtils.isBlank(user.getPassword())){
             throw new BusinessException(UserMessageConstant.USER_PASSWORD_EMPTY);
         }
-        User userCmp = new User();
-        BeanUtils.copyProperties(user,userCmp,User.class);
-        return userFacade.login(userCmp);
+        return userFacade.login(user);
     }
 
     @RequestMapping(value = "/logout")
-    @ResponseBody
-    @Async
     public Response<?> logout(UserDTO user){
         final User userCmp = new User();
-        BeanUtils.copyProperties(user,userCmp,User.class);
-        userFacade.logout(userCmp);
-        return Response.success();
+        userFacade.logout(user);
+        return new Response(ResponseTypeEnum.SUCCESS,null,null,null);
+    }
+
+
+   @PostMapping(value = "/register")
+    public Response<?> register(User user){
+       return userFacade.regsiterUser(user);
     }
 }
