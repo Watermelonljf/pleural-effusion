@@ -14,8 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public enum AvailableEnum {
 
-    USER_NOT_AVAILABLE(1,"用户未激活！"),
-    USER_AVAILABLED(2,"用户已激活");
+    USER_NOT_AVAILABLE(0,"用户未激活！"),
+    USER_AVAILABLED(1,"用户已激活");
 
     @Getter
     @Setter

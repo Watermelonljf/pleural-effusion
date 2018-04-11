@@ -3,6 +3,8 @@ package org.bysj.pleural.service.impl;
 import org.bysj.pleural.DiagnoseApplication;
 import org.bysj.pleural.bean.Xqjy;
 import org.bysj.pleural.dto.model.FoaParamsDTO;
+import org.bysj.pleural.facade.TrainModelFacade;
+import org.bysj.pleural.helper.MqSenderHelper;
 import org.bysj.pleural.service.ModelTrainService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,9 +27,16 @@ public class FOATrainServiceImplTest {
     @Autowired
     private ModelTrainService modleTrainService;
 
+    @Autowired
+    private MqSenderHelper mqSenderHelper;
+
+    @Autowired
+    private TrainModelFacade trainModelFacade;
 
     @Test
     public void trainModle() throws Exception {
+        FoaParamsDTO foaParamsDTO = new FoaParamsDTO(5,5);
+        trainModelFacade.trainModel(foaParamsDTO);
     }
 
     @Test
@@ -38,7 +47,12 @@ public class FOATrainServiceImplTest {
 
     @Test
     public void testSvmParams(){
-        modleTrainService.getModle(new FoaParamsDTO(10,10));
+        modleTrainService.getModle(new FoaParamsDTO(10,100));
+    }
+
+    @Test
+    public void testMq(){
+        mqSenderHelper.sendTrainResult();
     }
 
 }

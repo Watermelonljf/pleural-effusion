@@ -1,15 +1,13 @@
 package org.bysj.pleural.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.bysj.pleural.dto.common.PageResponse;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.dto.model.FoaParamsDTO;
 import org.bysj.pleural.dto.model.TrainModelRequestDTO;
 import org.bysj.pleural.facade.TrainModelFacade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 描述：模型训练控制器
@@ -31,5 +29,10 @@ public class ModelTrainController {
         return Response.success();
     }
 
+    @GetMapping(value="/get/trainData")
+    public PageResponse<?> queryPageTrainData(@RequestParam(value = "pageIndex") Integer pageIndex
+            ,@RequestParam(value = "pageSize") Integer pageSize){
+        return trainModelFacade.queryPageTrainData(pageIndex,pageSize);
+    }
 
 }

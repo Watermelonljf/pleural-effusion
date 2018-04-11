@@ -29,7 +29,9 @@ public interface ModelTrainService {
      * @return
      * @author ljianf
      */
-    <T> List<T> getTrainData();
+    List<Xqjy> getTrainData();
+
+    Integer countAllData();
 
 
 }

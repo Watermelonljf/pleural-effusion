@@ -29,7 +29,7 @@ public class UserMapperTest {
     @Test
     public void testFindAll(){
         PageHelper.startPage(0,10);
-        List<User> users = userMapper.listUsers();
+        List<User> users = userMapper.listUsersPage();
         users.forEach(user->{
             System.out.println(user.toString());
         });

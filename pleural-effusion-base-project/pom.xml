@@ -68,7 +68,11 @@
 			<version>3.6</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.46</version>
+		</dependency>
 		<!--Guava依赖-->
 		<dependency>
 			<groupId>com.google.guava</groupId>

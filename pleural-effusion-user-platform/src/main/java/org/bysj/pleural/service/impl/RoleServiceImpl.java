@@ -6,6 +6,9 @@ import org.bysj.pleural.mapper.RoleMapper;
 import org.bysj.pleural.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <pre>类名: RoleServiceImpl</pre>
@@ -21,7 +24,41 @@ public class RoleServiceImpl implements RoleService{
     private RoleMapper roleMapper;
 
     @Override
+    @Transactional
     public Integer saveRole(Role role) {
         return roleMapper.saveRole(role);
     }
+
+    @Override
+    public List<Role> queryRoles() {
+        return roleMapper.listRolesPage();
+    }
+
+    @Override
+    public Integer countRoles() {
+        return roleMapper.countRoles();
+    }
+
+    @Override
+    public Role queryById(Integer id) {
+        return roleMapper.queryById(id);
+    }
+
+    @Override
+    @Transactional
+    public Integer updateRole(Role role) {
+        return roleMapper.updateRole(role);
+    }
+
+    @Override
+    public Integer detele(Integer id) {
+        return roleMapper.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Integer batchDel(List<Integer> ids) {
+        return roleMapper.batchDel(ids);
+    }
+
 }

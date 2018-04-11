@@ -17,4 +17,5 @@ public class UserMessageConstant {
     public static final String USER_REGSITER_EMAIL_SEND_ERROR = "注册邮件发送异常！";
     public static final String USER_NOT_AVAILABLE = "当前用户未激活！";
     public static final String ROLE_NAME_EMPTY = "角色名不能为空！";
+    public static final String ROLE_NOT_AVAILABLE = "当前用户的角色不能使用！";
 }

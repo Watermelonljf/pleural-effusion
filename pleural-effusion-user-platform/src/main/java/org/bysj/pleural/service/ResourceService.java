@@ -1,6 +1,8 @@
 package org.bysj.pleural.service;
 
+import org.bysj.pleural.bean.Resource;
 import org.bysj.pleural.dto.user.MenuDTO;
+import org.bysj.pleural.dto.user.ResourceDTO;
 
 import java.util.List;
 
@@ -13,4 +15,6 @@ import java.util.List;
 public interface ResourceService {
 
     List<MenuDTO> getUserMenu(Integer userId);
+
+    List<Resource> getAllMenu();
 }

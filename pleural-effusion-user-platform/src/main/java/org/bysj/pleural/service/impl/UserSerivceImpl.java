@@ -4,6 +4,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.bysj.pleural.bean.Role;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.constant.user.UserMessageConstant;
 import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
@@ -16,6 +17,7 @@ import org.bysj.pleural.exception.BusinessException;
 import org.bysj.pleural.helper.JwtHelper;
 import org.bysj.pleural.helper.RedisHelp;
 import org.bysj.pleural.mapper.UserMapper;
+import org.bysj.pleural.service.RoleService;
 import org.bysj.pleural.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,15 +57,23 @@ public class UserSerivceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private RoleService roleService;
+
 
     @Override
     public User registeUser(User user) {
+        User u = this.findUserByUsername(user.getUsername());
+        if(!Objects.isNull(u)){
+            throw new BusinessException("该用户名已存在！");
+        }
         String salt = UUID.randomUUID().toString();
         //设置加密后的密码
         user.setPassword(DigestUtils.md5Hex(user.getPassword() + salt));
         user.setSalt(salt);
         user.setRoleId(RoleEnum.COMMON_USER.getCode());
         user.setCode(UUID.randomUUID().toString().replace("-",""));
+        log.info("保存用户信息");
         userMapper.saveUser(user);
         return user;
     }
@@ -94,13 +104,28 @@ public class UserSerivceImpl implements UserService {
 
     @Override
     public List<User> listUserPage(){
-        return null;
+        return userMapper.listUsersPage();
+    }
+
+    public Integer countUsers(){
+        return userMapper.countUsers();
+    }
+
+    @Override
+    public Integer batchDel(List<Integer> ids) {
+        return userMapper.batchDel(ids);
     }
 
     @Override
     public ClientUserInfoDTO login(UserDTO user) {
-
         User loginUser = userMapper.findUserByUsername(user.getUsername());
+        Role role = roleService.queryById(loginUser.getRoleId());
+        if(Objects.isNull(role)||role.getAvailable()==0){
+            throw new BusinessException(UserMessageConstant.ROLE_NOT_AVAILABLE);
+        }
+        if(loginUser.getAvailable()==AvailableEnum.USER_NOT_AVAILABLE.getCode()){
+            throw new BusinessException(UserMessageConstant.USER_NOT_AVAILABLE);
+        }
         log.info("检查登录信息开始");
         judgeUserInfo(loginUser,user);
         log.info("检查登录信息结束");
@@ -135,5 +160,13 @@ public class UserSerivceImpl implements UserService {
             throw new BusinessException(UserMessageConstant.USER_PASSWORD_OR_USERNAME_ERROR_INFO);
         }
         return true;
+    }
+
+    public Boolean activeUser(String code){
+        Integer activeCount = userMapper.activeUser(code);
+        if(activeCount==1){
+            return true;
+        }
+        return false;
     }
 }

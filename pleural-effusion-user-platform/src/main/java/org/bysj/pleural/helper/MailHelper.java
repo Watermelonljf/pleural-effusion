@@ -44,7 +44,7 @@ public class MailHelper{
             //主题
             message.setSubject("来自pleural-effusion系统的激活邮件");
             //正文
-            message.setContent("<h1>来自pleural-effusion的激活邮件，点击链接激活账号：</h1><h3><a href='http://localhost:9094/javamail01/active?code="+code+"'>http://localhost:8081/javamail01/active?code="+code+"</a></h3>", "text/html;charset=utf-8");
+            message.setContent("<h1>来自pleural-effusion的激活邮件，点击链接激活账号：</h1><h3><a href='http://localhost:9094/user/active?code="+code+"'>http://localhost:9094/user/active?code="+code+"</a></h3>", "text/html;charset=utf-8");
             // 3.发送激活邮件
             Transport.send(message);
         }

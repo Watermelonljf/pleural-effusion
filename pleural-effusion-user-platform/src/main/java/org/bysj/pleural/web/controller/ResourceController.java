@@ -29,4 +29,9 @@ public class ResourceController {
     public Response<List<MenuDTO>> getUserMenu(@RequestParam("userId") Integer userId){
         return resourceFacade.getUserMenus(userId);
     }
+
+    @GetMapping(value = "/list/all")
+    public Response<?> getAllMenu(){
+        return resourceFacade.getAllMenu();
+    }
 }

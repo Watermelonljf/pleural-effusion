@@ -23,6 +23,8 @@ public class RoleSaveRequestDTO {
 
     private String description;
 
-    private List<Integer> resourceIds;
+    private Integer available;
+
+    private String resource;
 
 }

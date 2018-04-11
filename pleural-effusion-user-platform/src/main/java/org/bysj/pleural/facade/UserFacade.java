@@ -1,9 +1,11 @@
 package org.bysj.pleural.facade;
 
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.constant.user.UserMessageConstant;
+import org.bysj.pleural.dto.common.PageResponse;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.dto.user.ChangePasswordRequestDTO;
 import org.bysj.pleural.dto.user.UserDTO;
@@ -14,11 +16,14 @@ import org.bysj.pleural.helper.MailHelper;
 import org.bysj.pleural.helper.RedisHelp;
 import org.bysj.pleural.service.CaptchaService;
 import org.bysj.pleural.service.UserService;
+import org.bysj.pleural.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -68,7 +73,7 @@ public class UserFacade {
            log.error("邮件发送异常,原因:{}",e);
            throw new BusinessException(UserMessageConstant.USER_REGSITER_EMAIL_SEND_ERROR);
         }
-        return Response.success();
+        return ResponseUtil.success(null);
     }
 
 
@@ -102,7 +107,7 @@ public class UserFacade {
     }
 
     /**
-     * @param user
+     * @param request
      * @return user
      * @Description: 修改密码
      * @date 2018/3/13 13:51
@@ -114,6 +119,33 @@ public class UserFacade {
             return Response.success();
         }
         return Response.error();
+    }
+
+    public Response<?> activeUser(String code){
+
+        if(userSerivce.activeUser(code)){
+            return Response.success();
+        }
+        return Response.error();
+
+    }
+
+    public PageResponse<?> listUsersPage(Integer pageIndex, Integer pageSize){
+        Integer count = userSerivce.countUsers();
+        if(count==0){
+           return PageResponse.success(count,new ArrayList<User>());
+        }
+        PageHelper.startPage(pageIndex,pageSize);
+        return PageResponse.success(count,userSerivce.listUserPage());
+    }
+
+    public Response<?> batchDel(List<Integer> ids){
+
+        if(userSerivce.batchDel(ids)==ids.size()){
+            return Response.success();
+        }
+        return Response.error();
+
     }
 
 }

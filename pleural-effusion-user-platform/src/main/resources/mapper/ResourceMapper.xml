@@ -9,6 +9,17 @@
         <result column="order" property="order"/>
     </resultMap>
 
+    <resultMap id="ResourceMap" type="org.bysj.pleural.bean.Resource">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="type" property="type"/>
+        <result column="icon" property="icon"/>
+        <result column="order" property="order"/>
+        <result column="available" property="available"/>
+    </resultMap>
+
     <select id="listUserResource" resultMap="BaseResultMap">
           SELECT
             r.role,res.name,res.url url,res.parent_id,res.order,res.icon,res.id resource_id
@@ -22,6 +33,21 @@
             AND r.id = rr.role_id
             AND rr.resource_id = res.id
             AND u.id = #{userId}
+    </select>
+
+
+    <select id="getAllResource" resultMap="ResourceMap">
+        SELECT
+        res.id,
+        .res.name,
+        res.url,
+        res.parent_id,
+        res.type,
+        res.icon,
+        res.order,
+        res.available
+        FROM
+        sys_resource res
     </select>
 
 </mapper>

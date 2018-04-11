@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.concurrent.Executor;
 
@@ -18,7 +19,7 @@ import java.util.concurrent.Executor;
 @EnableEurekaClient
 @MapperScan("org.bysj.pleural.mapper")
 @EnableAsync
-@EnableCircuitBreaker
+@EnableTransactionManagement
 public class UserPlatformApplication {
 
     public static void main(String[] args) {

@@ -5,8 +5,44 @@
         id,role,description,available,create_time,update_time
     </sql>
 
+    <resultMap id="BaseResultMap" type="org.bysj.pleural.bean.Role">
+        <id column="id" property="id"/>
+        <result column="role" property="role"/>
+        <result column="description" property="description"/>
+        <result column="available" property="available"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
     <insert id="saveRole" useGeneratedKeys="true" keyProperty="id" parameterType="org.bysj.pleural.bean.Role">
        INSERT INTO sys_role(role,description,available) VALUES(#{role},#{description},#{available})
     </insert>
+
+    <select id="listRolesPage" resultMap="BaseResultMap">
+        select <include refid="Base_Role_Columns"/> from sys_role
+    </select>
+
+    <select id="countRoles" resultType="java.lang.Integer">
+        select count(1) from sys_role
+    </select>
+
+    <update id="updateRole" parameterType="org.bysj.pleural.bean.Role">
+        update sys_role t set t.role=#{role},t.description=#{description},t.available=#{available} where t.id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM sys_role WHERE sys_role.id = #{id}
+    </delete>
+
+    <delete id="batchDel" parameterType="java.util.List">
+        DELETE FROM sys_role where sys_role.id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="queryById" resultType="org.bysj.pleural.bean.Role">
+        select <include refid="Base_Role_Columns"/> from sys_role t where t.id=#{id}
+    </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package org.bysj.pleural.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.bysj.pleural.bean.Role;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface RoleMapper {
      * @return
      * @author ljianf
      */
-    Integer deleteById();
+    Integer deleteById(@Param("id") Integer id);
 
     /**
      * @Description: 分页查询角色数据
@@ -41,4 +42,12 @@ public interface RoleMapper {
      * @author ljianf
      */
     List<Role> listRolesPage();
+
+    Integer countRoles();
+
+    Integer updateRole(Role role);
+
+    Integer batchDel(List<Integer> ids);
+
+    Role queryById(@Param(value = "id") Integer id);
 }

@@ -1,5 +1,7 @@
 package org.bysj.pleural.svm;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,8 +10,9 @@ import java.io.Serializable;
  * author: Watermelon_R
  * date:   2018/1/4
  */
+@Data
 public class SvmProblem implements Serializable {
     public int l;
-    public double[] y;
+    public double[] y; //label数组
     public SvmNode[][] x;
 }

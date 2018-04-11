@@ -1,5 +1,6 @@
 package org.bysj.pleural.mapper;
 
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.bysj.pleural.bean.User;
@@ -15,15 +16,22 @@ import java.util.List;
 @Mapper
 public interface UserMapper{
 
-    public void saveUser(User user);
+     void saveUser(User user);
 
-    public User findUserByUsername(@Param("username") String username);
+     User findUserByUsername(@Param("username") String username);
 
-    public Integer changePasswordByUsername(@Param("username") String username,@Param("password") String password);
-    public int updateUser(User user);
+     Integer changePasswordByUsername(@Param("username") String username,@Param("password") String password);
+     int updateUser(User user);
 
-    public User findById();
+     User findById();
 
-    public List<User> listUsers();
+     List<User> listUsersPage();
+
+     Integer activeUser(@Param("code") String code);
+
+     Integer countUsers();
+
+     Integer batchDel(List<Integer> ids);
+
 
 }

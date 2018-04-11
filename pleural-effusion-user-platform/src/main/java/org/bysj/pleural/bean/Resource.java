@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.swing.*;
 import java.util.Date;
 
 /**
@@ -29,6 +30,8 @@ public class Resource {
     private String url;
 
     private Integer parentId;
+
+    private String icon;
 
     private Integer available;
 

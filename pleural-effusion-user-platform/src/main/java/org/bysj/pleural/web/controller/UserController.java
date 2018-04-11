@@ -1,8 +1,10 @@
 package org.bysj.pleural.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.constant.user.UserMessageConstant;
+import org.bysj.pleural.dto.common.PageResponse;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.dto.user.UserDTO;
 import org.bysj.pleural.enumeration.common.ResponseTypeEnum;
@@ -13,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <pre>类名: UserController</pre>
@@ -47,8 +51,26 @@ public class UserController {
     }
 
 
-   @PostMapping(value = "/register")
+    @PostMapping(value = "/register")
     public Response<?> register(User user){
        return userFacade.regsiterUser(user);
+    }
+
+
+    @GetMapping(value = "/active")
+    public Response<?> activeUser(@RequestParam("code") String code){
+        return userFacade.activeUser(code);
+    }
+
+    @GetMapping(value = "/list")
+    public PageResponse<?> listUsersPage(@RequestParam(value = "pageIndex") Integer pageIndex,
+                                         @RequestParam(value ="pageSize") Integer pageSize){
+        return userFacade.listUsersPage(pageIndex,pageSize);
+    }
+
+    @PostMapping(value = "/delete")
+    public Response<?> batchDel(@RequestParam(value = "idsJson") String idsJson){
+        List<Integer> ids = JSON.parseArray(idsJson,Integer.class);
+        return userFacade.batchDel(ids);
     }
 }

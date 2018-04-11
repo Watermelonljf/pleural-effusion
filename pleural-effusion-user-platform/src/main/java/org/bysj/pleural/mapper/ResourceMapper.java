@@ -1,6 +1,7 @@
 package org.bysj.pleural.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.bysj.pleural.bean.Resource;
 import org.bysj.pleural.bean.User;
 import org.bysj.pleural.dto.user.ResourceDTO;
 
@@ -17,4 +18,7 @@ import java.util.List;
 public interface ResourceMapper {
 
     public List<ResourceDTO> listUserResource(Integer userId);
+
+
+    public List<Resource> getAllResource();
 }

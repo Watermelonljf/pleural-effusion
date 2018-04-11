@@ -20,10 +20,10 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * @Description: 注册用户
-     * @date   2018/3/14 10:26
      * @param
      * @return
+     * @Description: 注册用户
+     * @date 2018/3/14 10:26
      * @author ljianf
      */
     @Transactional
@@ -31,27 +31,33 @@ public interface UserService {
 
 
     /**
-     * @Description: 通过用户名查询用户
-     * @date   2018/3/14 9:42
      * @param
      * @return
+     * @Description: 通过用户名查询用户
+     * @date 2018/3/14 9:42
      * @author ljianf
      */
     public User findUserByUsername(String username);
 
     /**
-     * @Description: 修改密码
-     * @date   2018/3/14 17:11
      * @param request
      * @return int
+     * @Description: 修改密码
+     * @date 2018/3/14 17:11
      * @author ljianf
      */
     @Transactional
-    public Integer updatePassword(ChangePasswordRequestDTO request);
+    Integer updatePassword(ChangePasswordRequestDTO request);
 
+    @Transactional
+    Boolean activeUser(String code);
 
-    public List<User> listUserPage();
+    List<User> listUserPage();
 
-    public ClientUserInfoDTO login(UserDTO user);
+    ClientUserInfoDTO login(UserDTO user);
+
+    Integer countUsers();
+
+    Integer batchDel(List<Integer> ids);
 }
 

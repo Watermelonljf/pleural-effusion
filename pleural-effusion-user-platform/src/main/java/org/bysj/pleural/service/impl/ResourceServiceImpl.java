@@ -1,5 +1,6 @@
 package org.bysj.pleural.service.impl;
 
+import org.bysj.pleural.bean.Resource;
 import org.bysj.pleural.dto.user.MenuDTO;
 import org.bysj.pleural.dto.user.ResourceDTO;
 import org.bysj.pleural.mapper.ResourceMapper;
@@ -46,5 +47,10 @@ public class ResourceServiceImpl implements ResourceService {
             }
         }
         return menus;
+    }
+
+    @Override
+    public List<Resource> getAllMenu() {
+        return resourceMapper.getAllResource();
     }
 }

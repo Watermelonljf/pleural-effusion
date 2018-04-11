@@ -51,18 +51,18 @@ public class HttpAspect {
 
     }
 
-    @After("log()")
+ /*   @After("log()")
     public void doAfter(){
         logger.info("after");
         //获取response
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         //核心设置
         response.setHeader("Access-Control-Allow-Origin", "*");//解决跨域
-    }
+    }*/
 
-    @AfterReturning(returning = "object", pointcut = "log()")
+    /*@AfterReturning(returning = "object", pointcut = "log()")
     public void doAfterReturning(Object object){
         logger.info("response={}",object);
-    }
+    }*/
 
 }

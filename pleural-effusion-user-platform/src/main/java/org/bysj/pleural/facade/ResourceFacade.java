@@ -30,4 +30,8 @@ public class ResourceFacade {
     public Response<List<MenuDTO>> getUserMenus(Integer userId){
         return Response.success(resourceService.getUserMenu(userId));
     }
+
+    public Response<?> getAllMenu(){
+        return Response.success(resourceService.getAllMenu());
+    }
 }

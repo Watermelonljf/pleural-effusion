@@ -37,8 +37,8 @@ public class RoleFacadeTest {
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
-        roleSaveRequestDTO.setResourceIds(list);
-        roleFacade.saveRoleInfo(roleSaveRequestDTO);
+       /* roleSaveRequestDTO.setResourceIds(list);
+        roleFacade.saveRoleInfo(roleSaveRequestDTO);*/
     }
 
 }

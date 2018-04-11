@@ -15,4 +15,6 @@ import java.util.List;
 public interface TrainMapper {
 
     List<Xqjy> getAllTrainData();
+
+    Integer countAll();
 }

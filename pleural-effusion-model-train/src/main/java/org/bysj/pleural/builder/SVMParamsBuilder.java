@@ -37,7 +37,7 @@ public class SVMParamsBuilder {
         SvmProblem sp = new SvmProblem();
 
         //SVM训练数据长度
-        sp.l  = dataSetLength;
+        sp.setL(dataSetLength);
         //构造数据的结构
         for(int i=0;i<Xqjys.size();i++){
             int count=-1;
@@ -61,9 +61,9 @@ public class SVMParamsBuilder {
             }
         }
         //设置SVM训练参数
-        sp.x = dataSet;
+        sp.setX(dataSet);
         //SVM训练数据标签
-        sp.y=lables;
+        sp.setY(lables);
         return sp;
     }
 

@@ -5,4 +5,8 @@
         select * from t_xqjy
     </select>
 
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from t_xqjy
+    </select>
+
 </mapper>
