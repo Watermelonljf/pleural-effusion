@@ -72,6 +72,7 @@ public class FOATrainServiceImpl implements ModelTrainService {
             Svm s = new Svm();
             //利用最优参数训练保存最优模型
             model = s.svm_train(svmParams, svmParameter);
+            model.acc=svmParasByFOA.getAcc(); //保存每个模型的精度
         } catch (Exception e) {
             LOGGER.error("参数转换异常,原因：{}",e);
            throw new BusinessException("参数转换异常");

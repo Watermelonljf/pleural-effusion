@@ -45,11 +45,11 @@ public class User implements Serializable {
 
     private String code;  //注册激活码
 
-    private Integer locked;   //是否锁定
+    private String locked;   //是否锁定
 
-    private Integer available;
+    private String available;
 
-    private Integer isActive;
+    private String isActive;
 
     private Date createTime;
 

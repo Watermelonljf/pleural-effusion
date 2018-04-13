@@ -23,9 +23,13 @@ public class ResourceServiceImpl implements ResourceService {
     @Autowired
     private ResourceMapper resourceMapper;
 
+    public List<ResourceDTO> getUserResource(Integer userId){
+        return resourceMapper.listUserResource(userId);
+    }
+
     @Override
     public List<MenuDTO> getUserMenu(Integer userId) {
-        List<ResourceDTO> resources = resourceMapper.listUserResource(userId);
+        List<ResourceDTO> resources = getUserResource(userId);
         List<MenuDTO> menus = new ArrayList<>();
         resources.forEach(resource->{
             if(resource.getParentId()<0){

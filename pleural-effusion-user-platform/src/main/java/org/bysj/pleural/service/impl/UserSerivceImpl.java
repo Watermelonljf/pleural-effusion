@@ -148,11 +148,11 @@ public class UserSerivceImpl implements UserService {
             throw new BusinessException(UserMessageConstant.USER_NOT_EXIST_INFO);
         }
         //是否激活
-        if(AvailableEnum.USER_NOT_AVAILABLE.getCode()==loginUser.getAvailable()){
+        if(AvailableEnum.USER_NOT_AVAILABLE.equals(loginUser.getAvailable())){
             throw new BusinessException(UserMessageConstant.USER_NOT_AVAILABLE);
         }
         //首先判断用户是否是锁定用户
-        if (LockedStateEnum.USER_LOCKED.getCode() == loginUser.getLocked()) {
+        if (LockedStateEnum.USER_LOCKED.getCode().equals(loginUser.getLocked())) {
             throw new BusinessException(UserMessageConstant.USER_LOCKED_INFO);
         }
         //用户名或密码错误

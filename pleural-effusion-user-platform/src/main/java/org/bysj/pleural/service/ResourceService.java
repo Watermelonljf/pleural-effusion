@@ -1,5 +1,6 @@
 package org.bysj.pleural.service;
 
+import io.swagger.models.auth.In;
 import org.bysj.pleural.bean.Resource;
 import org.bysj.pleural.dto.user.MenuDTO;
 import org.bysj.pleural.dto.user.ResourceDTO;
@@ -13,7 +14,7 @@ import java.util.List;
  * <pre>作者: ljianf</pre>
  */
 public interface ResourceService {
-
+    List<ResourceDTO> getUserResource(Integer userId);
     List<MenuDTO> getUserMenu(Integer userId);
 
     List<Resource> getAllMenu();

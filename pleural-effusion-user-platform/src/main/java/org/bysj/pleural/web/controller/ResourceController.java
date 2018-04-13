@@ -34,4 +34,14 @@ public class ResourceController {
     public Response<?> getAllMenu(){
         return resourceFacade.getAllMenu();
     }
+
+    @GetMapping("/list/notGrant")
+    public Response<?> getNotGrantResource( @RequestParam("userId") Integer userId){
+        return resourceFacade.getUserNotGrantResource(userId);
+    }
+
+    @GetMapping("/list/grantedResult")
+    public Response<?> getGrantedResource(@RequestParam("userId") Integer userId){
+        return resourceFacade.getGrantedResource(userId);
+    }
 }

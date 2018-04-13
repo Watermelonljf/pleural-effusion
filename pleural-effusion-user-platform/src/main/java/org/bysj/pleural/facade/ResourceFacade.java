@@ -1,12 +1,15 @@
 package org.bysj.pleural.facade;
 
+import org.bysj.pleural.bean.Resource;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.dto.user.MenuDTO;
+import org.bysj.pleural.dto.user.ResourceDTO;
 import org.bysj.pleural.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resources;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -33,5 +36,26 @@ public class ResourceFacade {
 
     public Response<?> getAllMenu(){
         return Response.success(resourceService.getAllMenu());
+    }
+
+    public Response<?> getGrantedResource(Integer userId){
+        return Response.success(resourceService.getUserResource(userId));
+    }
+
+    public Response<?> getUserNotGrantResource(Integer userId){
+        List<Resource> allMenu = resourceService.getAllMenu();
+        List<ResourceDTO> userResource = resourceService.getUserResource(userId);
+
+        Iterator<Resource> iterator = allMenu.iterator();
+        while(iterator.hasNext()){
+            Resource resource = iterator.next();
+            userResource.forEach(e->{
+                if(e.getResourceId()==resource.getId()){
+                    iterator.remove();
+                }
+            });
+        }
+
+        return Response.success(allMenu);
     }
 }

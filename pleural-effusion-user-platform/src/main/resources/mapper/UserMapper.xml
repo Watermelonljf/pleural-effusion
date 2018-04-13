@@ -42,7 +42,7 @@
 
 
     <update id="activeUser" parameterType="String">
-        update sys_user t set t.is_active=1 where t.code=#{code}
+        update sys_user t set t.is_active='YES' where t.code=#{code}
     </update>
 
     <select id="countUsers" resultType="java.lang.Integer">
@@ -51,7 +51,7 @@
 
     <update id="batchDel" parameterType="java.util.List">
 
-        update sys_user t set t.available = 0 where t.id in
+        update sys_user t set t.available = 'NO' where t.id in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>

@@ -14,12 +14,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public enum AvailableEnum {
 
-    USER_NOT_AVAILABLE(0,"用户未激活！"),
-    USER_AVAILABLED(1,"用户已激活");
+    USER_NOT_AVAILABLE("NO","该用户名不存在！"),
+    USER_AVAILABLED("YES","用户名可用！");
 
     @Getter
     @Setter
-    private Integer code;
+    private String code;
 
     @Getter
     @Setter

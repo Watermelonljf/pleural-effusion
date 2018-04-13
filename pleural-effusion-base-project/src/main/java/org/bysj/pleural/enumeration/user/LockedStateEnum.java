@@ -15,12 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public enum LockedStateEnum {
 
-    USER_LOCKED(1,"用户已锁定"),
-    USER_NOT_lOCKED(2,"用户为锁定");
+    USER_LOCKED("YES","用户已锁定"),
+    USER_NOT_lOCKED("NO","用户为锁定");
 
     @Getter
     @Setter
-    private Integer code;
+    private String code;
 
     @Getter
     @Setter
