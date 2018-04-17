@@ -22,9 +22,9 @@ public class KaptchaConfig {
         properties.put("kaptcha.border", "no");
         properties.put("kaptcha.textproducer.font.color", "black");
         properties.put("kaptcha.textproducer.char.space", "10");
-        properties.put("kaptcha.textproducer.char.length","6");
+        properties.put("kaptcha.textproducer.char.length","4");
         properties.put("kaptcha.image.height","58");
-        properties.put("kaptcha.textproducer.font.size","28");
+        properties.put("kaptcha.textproducer.font.size","35");
         properties.put("kaptcha.background.clear.from","gray");
         properties.put("kaptcha.background.clear.to","white");
 

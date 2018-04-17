@@ -92,7 +92,7 @@ public class PoiHelper {
             for (int i=0;i<alias.size()-1;i++) {
                 String name = alias.get(i);
                 //获取此行指定列的值,即为属性对应的值
-                double property=row.getCell(i).getNumericCellValue();
+                double property=    row.getCell(i).getNumericCellValue();
                 BeanUtils.setProperty(instance, name, property);
             }
             pojoList.add(instance);

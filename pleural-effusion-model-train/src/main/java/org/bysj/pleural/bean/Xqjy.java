@@ -21,14 +21,14 @@ public class Xqjy {
 	private BigDecimal height; // 患者身高
 	private BigDecimal weight; // 体重
 	private Integer diabetes;// 是否有过糖尿病史1是2不是
-	private BigDecimal temperature;// 患者体温
+	private BigDecimal temperature;// 患者体温 2
 	private Integer gender; // 性别1男2女
-	private Integer age; // 年龄
+	private Integer age; // 年龄  3
 	private BigDecimal whiteCell; // 白细胞%
 	private BigDecimal neutrophils; // 中性粒细胞%
 	private BigDecimal acidGranulocyte;// 酸性粒细胞%
 	private BigDecimal alkalineGranulocyte;// 碱性粒细胞
-	private BigDecimal monocyte;// 单核细胞
+	private BigDecimal monocyte;// 单核细胞 1
 	private BigDecimal lymphocyte;// 淋巴细胞
 	private BigDecimal acidGranulocyteAbs;// 酸性粒绝对值
 	private BigDecimal neutrophilsAbs;// 中性粒细胞绝对值

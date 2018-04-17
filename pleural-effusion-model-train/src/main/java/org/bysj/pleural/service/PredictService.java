@@ -1,5 +1,6 @@
 package org.bysj.pleural.service;
 
+import org.bysj.pleural.dto.PersonalBlood;
 import org.bysj.pleural.svm.SvmNode;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,5 @@ import java.util.List;
 
 public interface PredictService {
 
-    List<Double> predict(List<SvmNode[]> predictData);
+    List<Double> predict(List<PersonalBlood> datas);
 }

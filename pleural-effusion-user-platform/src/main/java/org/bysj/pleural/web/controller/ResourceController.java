@@ -1,14 +1,13 @@
 package org.bysj.pleural.web.controller;
 
 import lombok.Getter;
+import org.bysj.pleural.dto.common.PageResponse;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.dto.user.MenuDTO;
 import org.bysj.pleural.facade.ResourceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,12 +35,22 @@ public class ResourceController {
     }
 
     @GetMapping("/list/notGrant")
-    public Response<?> getNotGrantResource( @RequestParam("userId") Integer userId){
-        return resourceFacade.getUserNotGrantResource(userId);
+    public Response<?> getNotGrantResource( @RequestParam("roleId") Integer roleId){
+        return resourceFacade.getUserNotGrantResource(roleId);
     }
 
     @GetMapping("/list/grantedResult")
-    public Response<?> getGrantedResource(@RequestParam("userId") Integer userId){
-        return resourceFacade.getGrantedResource(userId);
+    public Response<?> getGrantedResource(@RequestParam("roleId") Integer roleId){
+        return resourceFacade.getGrantedResource(roleId);
     }
+
+
+    @GetMapping("/list/roleResources")
+    public PageResponse<?> listResourceByRoleId(@RequestParam("roleId") Integer roleId){
+
+        return PageResponse.success(null,resourceFacade.getGrantedResource(roleId).getData());
+    }
+
+
+
 }

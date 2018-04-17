@@ -14,8 +14,8 @@ import lombok.Setter;
 public enum  ResponseTypeEnum {
 
     SUCCESS("SUCCESS","01"),
-    ERROE("ERROR","02");
-
+    ERROE("ERROR","02"),
+    EXPIRED("EXPIRED","03");
     @Getter
     @Setter
     private String text;

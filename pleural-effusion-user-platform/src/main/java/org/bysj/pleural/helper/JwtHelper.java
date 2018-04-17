@@ -1,11 +1,14 @@
 package org.bysj.pleural.helper;
 
 import com.google.common.collect.Maps;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.bysj.pleural.bean.User;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
 import java.util.Map;
 
@@ -16,6 +19,7 @@ import java.util.Map;
  * <pre>作者: ljianf</pre>
  */
 @Component
+@Slf4j
 public class JwtHelper {
 
     static final long EXPIRATIONTIME = 86400000;     // 一天
@@ -31,5 +35,15 @@ public class JwtHelper {
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
         return token;
+    }
+
+    public boolean checktoken(String token){
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token).getBody();
+       log.info("id:{}",claims.getId());
+       log.info("Subject:{}",claims.getSubject());
+       log.info("ex:{}",claims.getExpiration());
+       return true;
     }
 }

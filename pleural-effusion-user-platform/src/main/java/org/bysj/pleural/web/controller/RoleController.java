@@ -1,8 +1,10 @@
 package org.bysj.pleural.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.bysj.pleural.bean.Role;
+import org.bysj.pleural.bean.RoleResource;
 import org.bysj.pleural.constant.user.UserMessageConstant;
 import org.bysj.pleural.dto.common.PageResponse;
 import org.bysj.pleural.dto.common.Response;
@@ -61,5 +63,19 @@ public class RoleController {
     public Response<?> batche(String json){
         List<Integer> ids = JSON.parseArray(json, Integer.class);
         return roleFacade.batchDel(ids);
+    }
+
+    @PostMapping("/save/grantResources")
+    public Response<?> grantResources(@RequestParam("roleId") Integer roleId, @RequestParam("resourceStr") String resources){
+        List<Integer> resourceIds = JSON.parseArray(resources,Integer.class);
+        List<RoleResource> roleResources = Lists.newArrayList();
+        resourceIds.forEach(resourceId->{
+            RoleResource roleResource = new RoleResource();
+            roleResource.setResourceId(resourceId);
+            roleResource.setRoleId(roleId);
+            roleResources.add(roleResource);
+        });
+
+        return roleFacade.grantResources(roleResources);
     }
 }

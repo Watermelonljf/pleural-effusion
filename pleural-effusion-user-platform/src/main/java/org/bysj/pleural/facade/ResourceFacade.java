@@ -38,13 +38,24 @@ public class ResourceFacade {
         return Response.success(resourceService.getAllMenu());
     }
 
-    public Response<?> getGrantedResource(Integer userId){
-        return Response.success(resourceService.getUserResource(userId));
+    /**
+     * 获取已授权给角色的资源
+     * @param roleId
+     * @return
+     */
+    public Response<?> getGrantedResource(Integer roleId){
+        return Response.success(resourceService.getRoleResource(roleId));
     }
 
-    public Response<?> getUserNotGrantResource(Integer userId){
+
+    /**
+     * 获取未授权给角色的资源
+     * @param roleId
+     * @return
+     */
+    public Response<?> getUserNotGrantResource(Integer roleId){
         List<Resource> allMenu = resourceService.getAllMenu();
-        List<ResourceDTO> userResource = resourceService.getUserResource(userId);
+        List<ResourceDTO> userResource = resourceService.getRoleResource(roleId);
 
         Iterator<Resource> iterator = allMenu.iterator();
         while(iterator.hasNext()){

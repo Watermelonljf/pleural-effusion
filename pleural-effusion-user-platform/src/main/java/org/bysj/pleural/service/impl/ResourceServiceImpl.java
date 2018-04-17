@@ -57,4 +57,9 @@ public class ResourceServiceImpl implements ResourceService {
     public List<Resource> getAllMenu() {
         return resourceMapper.getAllResource();
     }
+
+    @Override
+    public List<ResourceDTO> getRoleResource(Integer roleId) {
+        return resourceMapper.listRoleResource(roleId);
+    }
 }

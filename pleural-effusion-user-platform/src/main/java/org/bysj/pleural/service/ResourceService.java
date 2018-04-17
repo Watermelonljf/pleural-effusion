@@ -18,4 +18,6 @@ public interface ResourceService {
     List<MenuDTO> getUserMenu(Integer userId);
 
     List<Resource> getAllMenu();
+
+    List<ResourceDTO> getRoleResource(Integer roleId);
 }

@@ -1,6 +1,7 @@
 package org.bysj.pleural.web;
 
 import com.alibaba.fastjson.JSON;
+import org.bysj.pleural.dto.PersonalBlood;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.exception.BusinessException;
 import org.bysj.pleural.facade.PredictFacade;
@@ -29,10 +30,10 @@ public class PredictController {
 
     @PostMapping(value = "/batch")
     public Response<?> predictHasPleural(@RequestParam(value="dataStr") String datas){
-        List<SvmNode[]> svmNodes = JSON.parseArray(datas, SvmNode[].class);
-        if(svmNodes.size()==0) {
+        List<PersonalBlood> bloods = JSON.parseArray(datas,PersonalBlood.class);
+        if(bloods.size()==0) {
             throw new BusinessException("预测样本为空！");
         }
-        return predictFacade.predict(svmNodes);
+        return predictFacade.predict(bloods);
     }
 }

@@ -118,4 +118,10 @@ public class Response<T> {
     public static <T> Response<T> error(String message){
         return new Response(ResponseTypeEnum.ERROE,"",message,null);
     }
+    public static <T> Response<T> expired(String message){
+        return new Response(ResponseTypeEnum.EXPIRED,"",message,null);
+    }
+    public static <T> Response<T> expired(){
+        return new Response(ResponseTypeEnum.EXPIRED,"",null,null);
+    }
 }

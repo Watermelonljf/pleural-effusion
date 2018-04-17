@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bysj.pleural.mapper.PatientMapper">
+
+    <select id="getPatientsPage" resultType="org.bysj.pleural.bean.Patient">
+        select * from t_patient_info
+    </select>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from t_patient_info
+    </select>
+
+    <insert id="savePatientMapper" parameterType="org.bysj.pleural.bean.Patient">
+        insert into t_patient_info(patient_name,sex,telephone,history,address)
+        values(#{patientName},#{sex},#{telephone},#{history},#{address})
+    </insert>
+
+    <select id="getBloodByPatientId" resultType="org.bysj.pleural.bean.PatientPleural">
+        select * from t_blood_predict_history t where t.patient_id=#{patientId}
+
+    </select>
+
+    <select id="countByPatientId" resultType="java.lang.Integer">
+        select count(1) from t_blood_predict_history t where t.patient_id=#{patientId}
+
+    </select>
+
+    <update id="savePredictResult" parameterType="java.util.List">
+
+        update t_blood_predict_history
+        set result =
+        <foreach collection="list" item="item" index="index"
+                 separator=" " open="case id" close="end">
+            when #{item.id} then #{item.result}
+        </foreach>
+        where id in
+        <foreach collection="list" index="index" item="item"
+                 separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+
+    </update>
+
+    <update id="confirmResult">
+            update t_blood_predict_history set doctor_result=#{result}
+            where id=#{sampleId}
+    </update>
+
+</mapper>

@@ -99,4 +99,13 @@ public class RoleFacade {
 
     }
 
+
+    public Response<?> grantResources(List<RoleResource> roleResources){
+
+        if(roleResourceService.saveRoleResources(roleResources)==roleResources.size()){
+            return Response.success();
+        }
+        return Response.error();
+    }
+
 }

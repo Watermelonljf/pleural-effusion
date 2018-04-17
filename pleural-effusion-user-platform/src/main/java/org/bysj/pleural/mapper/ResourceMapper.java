@@ -21,4 +21,6 @@ public interface ResourceMapper {
 
 
     public List<Resource> getAllResource();
+
+    List<ResourceDTO> listRoleResource(Integer roleId);
 }

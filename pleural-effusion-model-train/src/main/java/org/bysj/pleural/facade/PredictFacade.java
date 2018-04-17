@@ -1,5 +1,6 @@
 package org.bysj.pleural.facade;
 
+import org.bysj.pleural.dto.PersonalBlood;
 import org.bysj.pleural.dto.common.Response;
 import org.bysj.pleural.service.PredictService;
 import org.bysj.pleural.svm.SvmNode;
@@ -21,7 +22,7 @@ public class PredictFacade {
     private PredictService predictService;
 
 
-    public Response<?> predict(List<SvmNode[]> datas){
+    public Response<?> predict(List<PersonalBlood> datas){
         return Response.success(predictService.predict(datas));
     }
 
